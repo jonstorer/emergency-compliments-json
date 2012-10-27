@@ -1,4 +1,3 @@
-require 'sugar'
 redis     = require('redis-url').connect(process.env.REDISTOGO_URL)
 AppServer = require 'strata'
 http      = require 'http'
@@ -11,7 +10,7 @@ Compliments =
         callback( compliments )
       else
         data = ''
-        http.get 'http://emergencycompliment.com/js/compliments.js', ( response ) =>
+        http.get 'http://emergencycompliment.com/js/compliments.js', ( response ) ->
           response.on 'data', ( chunk ) -> data += chunk
           response.on 'end', =>
             eval( data.toString() )
