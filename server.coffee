@@ -26,5 +26,9 @@ AppServer.get '/api/v1/compliments.json', ( env, callback ) ->
   Compliments.all ( compliments ) ->
     AppServer.Response( JSON.stringify( compliments ) ).send( callback )
 
+# GET /api/v1/compliments.json
+AppServer.get '/', ( env, callback ) ->
+  AppServer.Response( 'Emergency Compliments JSON' ).send( callback )
+
 port = process.env.PORT || 5294
 AppServer.run({ port: port })
