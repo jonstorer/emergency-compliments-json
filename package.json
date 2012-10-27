@@ -1,0 +1,15 @@
+{
+  "name": "emergency-compliment",
+  "version": "0.0.1",
+  "dependencies": {
+    "strata": "*",
+    "sugar": "*",
+    "redis-url": "*"
+  },
+  "devDependencies" : {
+    "coffee-script": "*"
+  },
+  "scripts" : {
+    "run": "./node_modules/.bin/coffee server.coffee"
+  }
+}
