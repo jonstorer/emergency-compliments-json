@@ -6,8 +6,15 @@
     "sugar": "*",
     "redis-url": "*"
   },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  },
   "devDependencies" : {
     "coffee-script": "*"
+  },
+  "engines" : {
+    "coffee-script": "1.4.0"
   },
   "scripts" : {
     "run": "./node_modules/.bin/coffee server.coffee"

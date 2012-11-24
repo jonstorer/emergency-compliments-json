@@ -1,30 +1,17 @@
-redis     = require('redis-url').connect(process.env.REDISTOGO_URL)
-AppServer = require 'strata'
-http      = require 'http'
-
-Compliments =
-  all: ( callback ) ->
-    redis.get 'compliments', ( error, compliments ) ->
-      compliments = JSON.parse( compliments )
-      if compliments?.length
-        callback( compliments )
-      else
-        data = ''
-        http.get 'http://emergencycompliment.com/js/compliments.js', ( response ) ->
-          response.on 'data', ( chunk ) -> data += chunk
-          response.on 'end', =>
-            eval( data.toString() )
-            redis.set( 'compliments', JSON.stringify( compliments ) )
-            callback( compliments )
-
-#AppServer.use AppServer.commonLogger
-AppServer.use AppServer.contentType, 'application/json'
-AppServer.use AppServer.contentLength
-
-# GET /api/v1/compliments.json
-AppServer.get '/api/v1/compliments.json', ( env, callback ) ->
-  Compliments.all ( compliments ) ->
-    AppServer.Response( JSON.stringify( compliments ) ).send( callback )
-
+App  = require 'strata'
 port = process.env.PORT || 5294
-AppServer.run({ port: port })
+
+App.use App.commonLogger
+App.use App.contentType, 'application/json'
+App.use App.contentLength
+App.use App.file, require('path').resolve('./public'), 'index.html'
+
+# strategies
+getCompliments = require './strategies/eval'
+
+# GET /v1/compliments.json
+App.get '/v1/compliments', ( env, next ) ->
+  getCompliments ( compliments ) ->
+    App.Response(JSON.stringify(compliments)).send(next)
+
+App.run({ port: port })
