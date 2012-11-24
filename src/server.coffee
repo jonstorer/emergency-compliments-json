@@ -20,7 +20,7 @@ App.get '/v1/compliments', ( env, next ) ->
           console.log '************************************************************'
           console.log error
           console.log '************************************************************'
-          App.Response( error ).send( next )
+          App.Response( 'error' ).send( next )
         response.on 'data', ( chunk ) -> data += chunk
         response.on 'end', ->
           eval( data.toString() )
