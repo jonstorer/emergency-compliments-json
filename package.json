@@ -12,9 +12,6 @@
   "devDependencies" : {
     "coffee-script": "*"
   },
-  "engines" : {
-    "coffee-script": "1.4.0"
-  },
   "scripts" : {
     "run": "./node_modules/.bin/coffee src/server.coffee",
     "build": "./node_modules/.bin/coffee -o lib -c src/server.coffee"
