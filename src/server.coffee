@@ -12,15 +12,17 @@ App.get '/v1/compliments', ( env, next ) ->
   cacheKey = '/v1/compliments'
   redis.get cacheKey, ( error, compliments ) ->
     if compliments?.length
-      App.Response( compliments ).send(next)
+      App.Response( compliments ).send( next )
     else
       data = ''
       http.get 'http://emergencycompliment.com/js/compliments.js', ( response ) ->
+        response.on 'error', ( error ) ->
+          App.Response( error ).send( next )
         response.on 'data', ( chunk ) -> data += chunk
         response.on 'end', ->
           eval( data.toString() )
           compliments = JSON.stringify( compliments )
           redis.set( cacheKey, compliments )
-          App.Response( compliments ).send(next)
+          App.Response( compliments ).send( next )
 
 App.run({ port: ( process.env.PORT || 5294 ) })
