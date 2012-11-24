@@ -1,8 +1,7 @@
-redis_host = process.env.REDISTOGO_URL || 'localhost'
-redis      = require('redis-url').connect(redis_host)
-http       = require 'http'
+redis = require('redis-url').connect(process.env.REDISTOGO_URL || 'localhost')
+http  = require 'http'
 
-module.exports = fetchCompliments = ( callback ) ->
+module.exports = ( callback ) ->
   redis.get 'compliments', ( error, compliments ) ->
     compliments = JSON.parse( compliments )
     if compliments?.length
