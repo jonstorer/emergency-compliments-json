@@ -17,6 +17,6 @@
     "coffee-script": "1.4.0"
   },
   "scripts" : {
-    "run": "./node_modules/.bin/coffee server.coffee"
+    "run": "./node_modules/.bin/coffee src/server.coffee"
   }
 }
