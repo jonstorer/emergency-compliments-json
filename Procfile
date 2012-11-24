@@ -1,1 +1,1 @@
-web: coffee server.coffee
+web: node lib/server.js
