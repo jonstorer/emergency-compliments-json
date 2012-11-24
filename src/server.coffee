@@ -17,6 +17,9 @@ App.get '/v1/compliments', ( env, next ) ->
       data = ''
       http.get 'http://emergencycompliment.com/js/compliments.js', ( response ) ->
         response.on 'error', ( error ) ->
+          console.log '************************************************************'
+          console.log error
+          console.log '************************************************************'
           App.Response( error ).send( next )
         response.on 'data', ( chunk ) -> data += chunk
         response.on 'end', ->
