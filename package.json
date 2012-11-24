@@ -18,6 +18,6 @@
   },
   "scripts" : {
     "run": "./node_modules/.bin/coffee src/server.coffee",
-    "build": "./node_modules/.bin/coffee -c src/server.coffee lib/server.js"
+    "build": "./node_modules/.bin/coffee -o lib -c src/server.coffee"
   }
 }
